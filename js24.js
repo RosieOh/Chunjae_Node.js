@@ -6,6 +6,7 @@ const bodyPaser = require('body-parser');
 app.use(bodyPaser.urlencoded({extended: false}));
 const server = http.createServer(app);
 const PORT = 4000;
+
 let users = [
     {id:"kim", pw:"1234"},
     {id:"lee", pw:"4321"},
@@ -23,6 +24,7 @@ const findUserIndex = (id) => {     //findUserIndex("park") -> 2
     }
     return index;
 };
+
 //회원가입 함수
 const register = (id, pw) => {  //register("choi", "2424")
     let index = findUserIndex(id);
@@ -74,7 +76,7 @@ app.put("/:id",(req, res) => {
 //회원 탈퇴(delete)
 app.delete("/:id", (req, res) => {
     let id = req.params.id;
-    if(!deleteUser(id)) return resw.status(401).send("회원 탈퇴 실패");
+    if(!deleteUser(id)) return res.status(401).send("회원 탈퇴 실패");
     res.send("회원 탈퇴 성공");
 });
 //
@@ -87,3 +89,10 @@ app.post("/login", (req, res) => {
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
+//post man test
+//New -> HTTP -> 
+//GET : http://localhost:4000/kim
+//POST : http://localhost:4000          key:id=jeong, pw=3214
+//PUT : http://localhost:4000/kim       key:pw=7979
+//DELETE : http://localhost:4000/kim
