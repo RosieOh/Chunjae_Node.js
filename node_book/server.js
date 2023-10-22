@@ -18,10 +18,17 @@ app.listen(8000, function() {
 
 app.get('/book', function(req, res){
     res.send('도서 목록 관련 페이지입니다.');
-})
+});
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
-})
+});
+
+app.get('/list', function(req, res) {
+    conn.query("select * from post", function (err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+    });
+});
 
 
